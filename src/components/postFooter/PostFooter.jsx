@@ -3,6 +3,25 @@ import "./PostFooter.scss";
 
 export default function PostFooter() {
   const [isLiked, setIsLiked] = useState(false);
+  const [value, setValue] = useState("");
+  const [comments, setComments] = useState([]);
+  const handleClick = () => {
+    if (value !== "") {
+      const newComment = {
+        text: value,
+        createdAt: `${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
+      };
+      setComments([...comments, newComment]);
+      setValue("");
+    }
+  };
+
+  const handleDelete = (i) => {
+    let currentState = [...comments];
+    currentState.splice(i, 1);
+    setComments([...currentState]);
+  };
+
   return (
     <div className="post-footer">
       {!isLiked ? (
@@ -36,6 +55,86 @@ export default function PostFooter() {
           />
         </svg>
       )}
+      <div className="post-footer__container">
+        <input
+          className="post-footer__input"
+          placeholder="Type your comment"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <button className="post-footer__btn" onClick={handleClick}>
+          Add comment
+        </button>
+      </div>
+      <div className="post-footer__comments">
+        {comments.map((comment, ind) => (
+          <div className="post-footer__comments__single__container">
+            <div className="post-footer__comments__single__info">
+              <p className="post-footer__comments__single__text">
+                {comment.text}
+              </p>
+              <span className="post-footer__comments__single__date">
+                {comment.createdAt}
+              </span>
+            </div>
+            <div className="post-footer__comments__single__icon">
+              <svg
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                onClick={() => handleDelete(ind)}
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path
+                    d="M10 12V17"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>{" "}
+                  <path
+                    d="M14 12V17"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>{" "}
+                  <path
+                    d="M4 7H20"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>{" "}
+                  <path
+                    d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>{" "}
+                  <path
+                    d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>{" "}
+                </g>
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

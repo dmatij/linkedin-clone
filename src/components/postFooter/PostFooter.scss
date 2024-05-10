@@ -2,7 +2,65 @@
   display: flex;
   align-items: flex-start;
   margin-top: 8px;
+  flex-direction: column;
+  gap: 8px;
   &__action {
     cursor: pointer;
+  }
+  &__input {
+    padding: 4px 8px;
+    background-color: whitesmoke;
+  }
+  &__btn {
+    padding: 4px;
+    background-color: green;
+    border-radius: 16px;
+    color: white;
+    font-weight: 700;
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(96, 160, 0);
+    }
+  }
+  &__container {
+    display: flex;
+    gap: 8px;
+  }
+  &__comments {
+    width: 100%;
+    background-color: rgb(236, 233, 230);
+    border-radius: 4px;
+
+    &__single {
+      &__container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-bottom: 1px solid white;
+      }
+      &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 48x;
+        padding: 16px 0;
+      }
+      &__text {
+        text-align: start;
+        font-size: 12px;
+        color: rgb(60, 60, 60);
+      }
+      &__date {
+        font-size: 10px;
+        color: rgb(120, 120, 120);
+      }
+      &__icon {
+        display: flex;
+        align-items: center;
+
+        & svg:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
